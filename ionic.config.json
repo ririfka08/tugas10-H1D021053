@@ -1,0 +1,7 @@
+{
+  "name": "tugas10_H1D021053",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
