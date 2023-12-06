@@ -1,0 +1,97 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Data Mahasiswa</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Header for large screens -->
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Data Mahasiswa</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- List of Mahasiswa -->
+  <ion-card *ngFor="let item of dataMahasiswa">
+    <ion-item>
+      <ion-label>
+        {{item.nama}}
+        <p>{{item.jurusan}}</p>
+      </ion-label>
+      <ion-button expand="block" (click)="open_modal_edit(true, item.id)">Edit</ion-button>
+      <ion-button color="danger" slot="end" (click)="hapusMahasiswa(item.id)">Hapus</ion-button>
+    </ion-item>
+  </ion-card>
+
+  <!-- Button to add Mahasiswa -->
+  <ion-card>
+    <ion-button (click)="open_modal_tambah(true)" expand="block">Tambah Mahasiswa</ion-button>
+  </ion-card>
+
+  <!-- Modal for adding Mahasiswa -->
+  <ion-modal [isOpen]="modal_tambah">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Batal</ion-button>
+          </ion-buttons>
+          <ion-title>Tambah Mahasiswa</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <!-- Input fields for adding Mahasiswa -->
+        <ion-item>
+          <ion-label position="floating">Nama Mahasiswa</ion-label>
+          <ion-input [(ngModel)]="nama" required type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Jurusan Mahasiswa</ion-label>
+          <ion-input [(ngModel)]="jurusan" required type="text"></ion-input>
+        </ion-item>
+        <ion-row>
+          <ion-col>
+            <!-- Button to submit the form and add Mahasiswa -->
+            <ion-button (click)="tambahMahasiswa()" color="warning" expand="full">Tambah Mahasiswa</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <!-- Modal for editing Mahasiswa -->
+  <ion-modal [isOpen]="modal_edit">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Batal</ion-button>
+          </ion-buttons>
+          <ion-title>Edit Mahasiswa</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <!-- Input fields for editing Mahasiswa -->
+        <ion-item>
+          <ion-label position="floating">Nama Mahasiswa</ion-label>
+          <ion-input [(ngModel)]="nama" required type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Jurusan Mahasiswa</ion-label>
+          <ion-input [(ngModel)]="jurusan" required type="text"></ion-input>
+        </ion-item>
+        <ion-input [(ngModel)]="id" type="hidden"></ion-input>
+        <ion-row>
+          <ion-col>
+            <!-- Button to submit the form and edit Mahasiswa -->
+            <ion-button (click)="editMahasiswa()" color="warning" expand="full">Edit Mahasiswa</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>
